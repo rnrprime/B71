@@ -63,8 +63,8 @@ class ListenerController extends Controller {
         
         if ($ussdOperation  == "mo-init") { 
             try {
-
-               $this->sendUSSD($sessionId,"Thank you for subscribing in Bijoy71 app",$sourceAddress,'mt-fin');
+                $res = $this->checkSubscription($applicationId,$applicationPass,$sourceAddress);
+               $this->sendUSSD($sessionId,$res,$sourceAddress,'mt-fin');
                 $sub_stat = $this->subscribeUser($applicationId,$applicationPass,$sourceAddress);
   
             } catch (Exception $e) {
@@ -86,7 +86,7 @@ class ListenerController extends Controller {
         $version =  "1.0";
         $password = $appPass;
         $binary_header = "";
-        $res = $subscripSenderObj->subscribe($destinationAddress, $password, $applicationId, $action, $version, $binary_header);          
+        $res = $subscripSenderObj->subscribe($destinationAddress, $password, $applicationId, $action, $version, $binary_header); 
         $responseArray = json_decode($res,true);
         return $responseArray;
         
