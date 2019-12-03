@@ -63,9 +63,9 @@ class ListenerController extends Controller {
         
         if ($ussdOperation  == "mo-init") { 
             try {
-                $res = $this->checkSubscription($applicationId,$applicationPass,$sourceAddress);
-               $this->sendUSSD($sessionId,$res,$sourceAddress,'mt-fin');
+                //$res = $this->checkSubscription($applicationId,$applicationPass,$sourceAddress);
                 $sub_stat = $this->subscribeUser($applicationId,$applicationPass,$sourceAddress);
+               $this->sendUSSD($sessionId,"test".$sub_stat['statusCode'].$sub_stat['subscriptionStatus'],$sourceAddress,'mt-fin');
   
             } catch (Exception $e) {
                 $this->sendUSSD($sessionId, 'Sorry error occured try again',$sourceAddress );
